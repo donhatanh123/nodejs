@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mysql = require('mysql');
+var mysql = require('mysql2');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
 });
 
 var Conn = mysql.createConnection({
-  host: "172.17.0.2",
+  host: process.env.DB_HOST,
   user: "root",
   password: "123456"
 });
@@ -19,24 +19,24 @@ var Conn = mysql.createConnection({
 Conn.connect(function(err) {
   if (err) 
    {
-     console.log("Error when connet tp MYSQL: "+ err);
+     console.log("Connet to MYSQL ERROR: "+ err);
      throw err;
    }
   console.log("MYSQL Connected!");
-  Conn.query("CREATE DATABASE userapidb", function (err, result) {
-    if (err) 
-    {
-        console.log("Continue running, but Error when create DB: "+ err);
-       //throw err;
-    }    
-   console.log(" DB userapidb OK");
-  });
-});
 
-Conn.end();
+  Conn.query("CREATE DATABASE IF NOT EXISTS userapidb", function (err, result) {
+      if (err) 
+      {
+        console.log("Continue running, but Error when create DB: "+ err);
+      }    
+     console.log(" DB userapidb OK");
+      });
+   });
+
+//Conn.end();
 
 var dbConn = mysql.createConnection({
-  host: "172.17.0.2",
+  host: process.env.DB_HOST,
   user: "root",
   password: "123456",
   database : "userapidb"
@@ -51,6 +51,7 @@ dbConn.connect(function(err) {
     if (err) {
                 console.log("Co loi khi tao table " + err);
               }
+     console.log("DB Ready. App is running... ");
   });
 
 });

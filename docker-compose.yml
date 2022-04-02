@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  webapp:
+    environment:
+      - DB_HOST=172.20.0.2
+    image: nodeapi:v3
+    ports:
+      - "3000:3000"
+    networks:
+      - bridge500
+networks:
+  bridge500:
+    external: true 
