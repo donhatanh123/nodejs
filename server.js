@@ -10,13 +10,13 @@ app.get('/', function (req, res) {
     return res.send({ error: true, message: 'hello' })
 });
 
-var Conn = mysql.createConnection({
+var dbConn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: "root",
   password: "123456"
 });
 
-Conn.connect(function(err) {
+dbConn.connect(function(err) {
   if (err) 
    {
      console.log("Connet to MYSQL ERROR: "+ err);
@@ -24,45 +24,35 @@ Conn.connect(function(err) {
    }
   console.log("MYSQL Connected!");
 
-  Conn.query("CREATE DATABASE IF NOT EXISTS userapidb", function (err, result) {
+  dbConn.query("CREATE DATABASE IF NOT EXISTS userapidb", function (err, result) {
       if (err) 
       {
         console.log("Continue running, but Error when create DB: "+ err);
       }    
      console.log(" DB userapidb OK");
       });
+
+      var sql = "CREATE TABLE IF NOT EXISTS users ( id int(11) NOT NULL, name varchar(200) NOT NULL, email varchar(200) NOT NULL, created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE=InnoDB ";
+      
+      dbConn.query(sql, function (err, result) {
+        if (err) {
+                    console.log("Co loi khi tao table " + err);
+                  }
+         console.log("DB Ready. App is running... ");
+    
+     var sql1="INSERT INTO users (id, name, email, created_at) VALUES (1, 'Max', 'max@gmail.com', '2020-03-18 23:20:20'), (2, 'John', 'john@gmail.com', '2020-03-18 23:45:20'), (3, 'David', 'david@gmail.com', '2020-03-18 23:30:20'), (4, 'James', 'james@gmail.com', '2020-03-18 23:10:20'), (5, 'Shaw', 'shaw@gmail.com', '2020-03-18 23:15:20') "; 
+     sql1="select * from users"; 
+     
+     dbConn.query(sql1, function (err, result) {
+     if (err) {
+                 console.log("Co loi khi insert data " + err);
+               }
+     });
    });
 
 //Conn.end();
 
-var dbConn = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: "root",
-  password: "123456",
-  database : "userapidb"
-});
-
-dbConn.connect(function(err) {
-  if (err) {
-             console.log("Ket noi DB err:" +err);
-           }
-  var sql = "CREATE TABLE IF NOT EXISTS users ( id int(11) NOT NULL, name varchar(200) NOT NULL, email varchar(200) NOT NULL, created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE=InnoDB ";
-  dbConn.query(sql, function (err, result) {
-    if (err) {
-                console.log("Co loi khi tao table " + err);
-              }
-     console.log("DB Ready. App is running... ");
-  });
-
-});
-
-    var sql1="INSERT INTO users (id, name, email, created_at) VALUES (1, 'Max', 'max@gmail.com', '2020-03-18 23:20:20'), (2, 'John', 'john@gmail.com', '2020-03-18 23:45:20'), (3, 'David', 'david@gmail.com', '2020-03-18 23:30:20'), (4, 'James', 'james@gmail.com', '2020-03-18 23:10:20'), (5, 'Shaw', 'shaw@gmail.com', '2020-03-18 23:15:20') "; 
-        sql1="select * from users"; 
-    dbConn.query(sql1, function (err, result) {
-    if (err) {
-                console.log("Co loi khi insert data " + err);
-              }
-    });
+ 
 
 
 
