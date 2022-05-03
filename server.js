@@ -32,7 +32,9 @@ dbConn.connect(function(err) {
      console.log(" DB userapidb OK");
       });
 
-      var sql = "CREATE TABLE IF NOT EXISTS users ( id int(11) NOT NULL, name varchar(200) NOT NULL, email varchar(200) NOT NULL, created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE=InnoDB ";
+      
+
+      var sql = " CREATE TABLE IF NOT EXISTS userapidb.users ( id int(11) NOT NULL, name varchar(200) NOT NULL, email varchar(200) NOT NULL, created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE=InnoDB ";
       
       dbConn.query(sql, function (err, result) {
         if (err) {
@@ -40,7 +42,7 @@ dbConn.connect(function(err) {
                   }
          console.log("DB Ready. App is running... ");
         });
-     var sql1="INSERT INTO users (id, name, email, created_at) VALUES (1, 'Max', 'max@gmail.com', '2020-03-18 23:20:20'), (2, 'John', 'john@gmail.com', '2020-03-18 23:45:20'), (3, 'David', 'david@gmail.com', '2020-03-18 23:30:20'), (4, 'James', 'james@gmail.com', '2020-03-18 23:10:20'), (5, 'Shaw', 'shaw@gmail.com', '2020-03-18 23:15:20') "; 
+     var sql1="INSERT INTO userapidb.users (id, name, email, created_at) VALUES (1, 'Max', 'max@gmail.com', '2020-03-18 23:20:20'), (2, 'John', 'john@gmail.com', '2020-03-18 23:45:20'), (3, 'David', 'david@gmail.com', '2020-03-18 23:30:20'), (4, 'James', 'james@gmail.com', '2020-03-18 23:10:20'), (5, 'Shaw', 'shaw@gmail.com', '2020-03-18 23:15:20') "; 
      sql1="select * from users"; 
      
      dbConn.query(sql1, function (err, result) {
