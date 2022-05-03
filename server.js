@@ -32,7 +32,13 @@ dbConn.connect(function(err) {
      console.log(" DB userapidb OK");
       });
 
-      
+      dbConn.query("USE userapidb", function (err, result) {
+        if (err) 
+        {
+          console.log("Continue running, but Error when create DB: "+ err);
+        }    
+       console.log(" Select userapidb OK");
+        });
 
       var sql = " CREATE TABLE IF NOT EXISTS userapidb.users ( id int(11) NOT NULL, name varchar(200) NOT NULL, email varchar(200) NOT NULL, created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE=InnoDB ";
       
