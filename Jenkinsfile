@@ -4,7 +4,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('nodejsapp')
+    DOCKER_CREDENTIALS = credentials('nodejsapp')
   }
   stages {
     stage('Build') {
@@ -15,7 +15,8 @@ pipeline {
     }
     stage('Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR registry.gitlab.com/xzhoang/nodejsmysql   --password-stdin'
+        sh 'echo $DOCKER_CREDENTIALS_PSW'
+        sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR registry.gitlab.com/xzhoang/nodejsmysql   --password-stdin'
       }
     }
     stage('Push') {
