@@ -4,6 +4,8 @@ services:
   webapp:
     environment:
       - DB_HOST=172.20.0.2
+      - DB_USER=root
+      - DB_PASS=a123456
     image: nodeapi:v3
     ports:
       - "3000:3000"
