@@ -6,10 +6,10 @@ install : sudo apt install npm
 Run project with:
 
 npm install
-node server.js DB_HOST=172.17.0.2
+node server.js DB_HOST=172.17.0.2 DB_USER=root DB_PASS=a123456
 
 require: mysql is running on: 172.17.0.2 with:
 mysql user=root
-mysql root password= 123456
+mysql root password= a123456
+(run docker mysql or RDS)
 
-For the first time run: DB may not exits, and return error, just run it again
