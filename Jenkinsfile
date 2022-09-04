@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'whoami && pwd'
-        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:latest  . '
+        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
       }
     }
     stage('Login') {
