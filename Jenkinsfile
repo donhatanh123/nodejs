@@ -17,7 +17,7 @@ pipeline {
     stage('Login') {
       steps {
         sh 'echo $DOCKER_CREDENTIALS_PSW'
-	sh 'echo Git_Tag_Name= $apinodejsTag'
+	sh 'echo Git_Tag_Name= $apinodejsTag  origin Tag=  $GIT_TAG_NAME '
         sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR registry.gitlab.com/xzhoang/nodejsmysql   --password-stdin'
       }
     }
