@@ -5,13 +5,14 @@ pipeline {
   }
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
-//    apinodejsTag    = "${GIT_TAG_NAME}" 
+    apinodejsTag    = "${env.GIT_TAG_NAME}" 
   }
   stages {
     stage('Build') {
       steps {
         sh 'whoami && pwd'
-        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:${GIT_TAG_NAME}  . '
+        echo 'Git_Tag_Name= $apinodejsTag  origin Tag=  ${env.GIT_TAG_NAME} '
+        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
       }
     }
     stage('Login') {
@@ -23,7 +24,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push registry.gitlab.com/xzhoang/nodejsmysql:${GIT_TAG_NAME} '
+        sh 'docker push registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag '
       }
     }
   }
