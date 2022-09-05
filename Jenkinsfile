@@ -10,8 +10,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'whoami && pwd'
-        echo 'Git_Tag_Name= $apinodejsTag  origin Tag=  ${env.GIT_TAG_NAME} '
+        sh "printenv"
+        sh ' echo $GIT_TAG_NAME > /tmp/pyapptag.txt'
+        sh ' cat /tmp/pyapptag.txt'
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
       }
     }
