@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
-    apinodejsTag    = '$GIT_TAG_NAME' 
+    apinodejsTag    = ${GIT_TAG_NAME} 
   }
   stages {
     stage('Build') {
@@ -16,8 +16,8 @@ pipeline {
     }
     stage('Login') {
       steps {
-        sh 'echo $DOCKER_CREDENTIALS_PSW'
-	sh 'echo Git_Tag_Name= $apinodejsTag  origin Tag=  $GIT_TAG_NAME '
+        
+	echo 'Git_Tag_Name= $apinodejsTag  origin Tag=  $GIT_TAG_NAME '
         sh 'echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR registry.gitlab.com/xzhoang/nodejsmysql   --password-stdin'
       }
     }
