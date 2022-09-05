@@ -5,13 +5,13 @@ pipeline {
   }
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
-    apinodejsTag    = "${env.GIT_TAG_NAME}" 
+    apinodejsTag    =  sh 'basename  $gitlabBranch' 
   }
   stages {
     stage('Build') {
       steps {
         sh "printenv"
-        sh ' echo $GIT_TAG_NAME > /tmp/pyapptag.txt'
+        sh 'basename  $gitlabBranch > /tmp/pyapptag.txt'
         sh ' cat /tmp/pyapptag.txt'
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
       }
