@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
-    apinodejsTag    = $GIT_TAG_NAME 
+    apinodejsTag    = '$GIT_TAG_NAME' 
   }
   stages {
     stage('Build') {
