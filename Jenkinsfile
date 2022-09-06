@@ -11,7 +11,7 @@ pipeline {
     stage('Build') {
       steps {
         sh "printenv"
-        env.apinodejsTag=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+        apinodejsTag=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
         echo " apinodejsTag = ${env.apinodejsTag}"
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
       }
