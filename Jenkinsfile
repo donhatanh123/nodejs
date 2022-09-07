@@ -13,8 +13,8 @@ pipeline {
     stage('Build') {
       steps {
         sh "printenv"
-        echo "Bigget Tag version: apinodejsTag1= ${apinodejsTag1} "
-        echo "Current push Tag version: apinodejsTag2= ${env.apinodejsTag2} origin= $gitlabBranch"
+        echo "Current Tag version: apinodejsTag1= ${apinodejsTag1} "
+        echo "Bigest Tag version: apinodejsTag2= ${env.apinodejsTag2} origin= $gitlabBranch"
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1  . '
       }
     }
