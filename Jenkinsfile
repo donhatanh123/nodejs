@@ -1,4 +1,3 @@
-def apinodejsTag2="v1.0"
 
 pipeline {
   agent any
@@ -15,7 +14,7 @@ pipeline {
       steps {
         sh "printenv"
         echo "Bigget Tag version: apinodejsTag1= ${apinodejsTag1} "
-        echo "Current push Tag version: apinodejsTag2= ${apinodejsTag2} origin= $gitlabBranch"
+        echo "Current push Tag version: apinodejsTag2= ${env.apinodejsTag2} origin= $gitlabBranch"
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1  . '
       }
     }
