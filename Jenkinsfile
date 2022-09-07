@@ -27,19 +27,22 @@ pipeline {
         sh 'docker push registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1 '
       }
     }
+    stage('Update TAG to env') {
+      steps {
+          script{
+             def nodes = Jenkins.getInstance().getGlobalNodeProperties()
+             def envVars= nodes.get(0).getEnvVars()
+             envVars.put("apinodejsTag", "{$apinodejsTag1}")
+             Jenkins.getInstance().save()
+             }
+
+        echo "Deploying Tag version: ${env.apinodejsTag} "
+      }
   }
   post {
     
     always {
       sh 'docker logout'
-    }
-    success {
-      echo "Update Tag release"
-      def nodes = Jenkins.getInstance().getGlobalNodeProperties()
-      def envVars= nodes.get(0).getEnvVars()
-      envVars.put("apinodejsTag", "${apinodejsTag1}")
-      Jenkins.getInstance().save()
-
     }
     
   }
