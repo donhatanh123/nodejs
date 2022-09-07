@@ -1,4 +1,4 @@
-def apinodejsTag2=v1.0
+def apinodejsTag2="v1.0"
 
 pipeline {
   agent any
