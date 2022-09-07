@@ -5,14 +5,14 @@ pipeline {
   }
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
-    apinodejsTag=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
+    apinodejsTag1=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
   }
   stages {
     stage('Build') {
       steps {
         sh "printenv"
         echo " apinodejsTag= ${env.apinodejsTag} "
-        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag  . '
+        sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1  . '
       }
     }
     stage('Login') {
@@ -24,14 +24,24 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag '
+        sh 'docker push registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1 '
       }
     }
   }
   post {
+    
     always {
       sh 'docker logout'
     }
+    success {
+      echo "Update Tag release"
+      def nodes = Jenkins.getInstance().getGlobalNodeProperties()
+      def envVars= nodes.get(0).getEnvVars()
+      envVars.put("apinodejsTag", "${apinodejsTag1}")
+      Jenkins.getInstance().save()
+
+    }
+    
   }
 }
 
