@@ -6,14 +6,14 @@ pipeline {
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
     apinodejsTag1=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
-    //apinodejsTag2 =`basename $`
+    apinodejsTag2 =`basename $gitlabTargetBranch`
   }
   stages {
     stage('Build') {
       steps {
         sh "printenv"
         echo "Bigget Tag version: apinodejsTag1= ${apinodejsTag1} "
-    //    echo "Current push Tag version: apinodejsTag2= ${apinodejsTag2} "
+        echo "Current push Tag version: apinodejsTag2= ${apinodejsTag2} "
         sh 'docker build -t registry.gitlab.com/xzhoang/nodejsmysql:$apinodejsTag1  . '
       }
     }
