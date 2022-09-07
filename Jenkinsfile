@@ -6,7 +6,7 @@ pipeline {
   environment {
     DOCKER_CREDENTIALS = credentials('nodejsapp')
     apinodejsTag1=sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
-    apinodejsTag2 =`basename $gitlabTargetBranch`
+    apinodejsTag2 =sh(`basename  $gitlabBranch`)
   }
   stages {
     stage('Build') {
