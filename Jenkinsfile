@@ -37,7 +37,8 @@ pipeline {
              }
 
         echo "Deploying Tag version: ${env.apinodejsTag} "
-      }
+             }
+                              }
   }
   post {
     
