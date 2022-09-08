@@ -13,3 +13,4 @@ mysql user=root
 mysql root password= a123456
 (run docker mysql or RDS)
 
+Run Tag version
