@@ -12,6 +12,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+
+        checkout scm: [$class: 'GitSCM', 
+        userRemoteConfigs: [[url: 'registry.gitlab.com/xzhoang/nodejsmysql']], 
+        branches: [[name: '${gitlabBranch}']]], changelog: false, poll: false
+
+
         sh "printenv"
         echo "Current Tag version: apinodejsTag1= ${apinodejsTag1} "
         echo "Bigest Tag version: apinodejsTag2= ${env.apinodejsTag2} origin= $gitlabBranch"
