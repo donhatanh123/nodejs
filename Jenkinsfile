@@ -13,7 +13,7 @@ pipeline {
     stage('Build') {
       steps {
 
-        sh " git checkout tag $apinodejsTag1"  
+        sh " git checkout $apinodejsTag1"  
 
         sh "printenv"
         echo "Current Tag version: apinodejsTag1= ${apinodejsTag1} "
