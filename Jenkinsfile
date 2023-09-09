@@ -28,8 +28,8 @@ pipeline {
 
                 sh "docker run --name nhatanh-mysql --network dev -v nhatanh-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=db_example  -d --restart always mysql "
                 sh 'sleep 20'
-                sh "docker exec -i nhatanh-mysql mysql -u root -p123456a@ -e \"CREATE USER 'nodejs'@'&' IDENTIFIED BY '123456a@';\""
-                sh "docker exec -i nhatanh-mysql mysql -u root -p123456a@ -e \"GRANT ALL PRIVILEGES ON *.* TO 'nodejs'@'&' WITH GRANT OPTION;\""
+                sh "docker exec -i nhatanh-mysql mysql -u root -p123456a@ -e \"CREATE USER 'nodejs'%'&' IDENTIFIED BY '123456a@';\""
+                sh "docker exec -i nhatanh-mysql mysql -u root -p123456a@ -e \"GRANT ALL PRIVILEGES ON *.* TO 'nodejs'@'%' WITH GRANT OPTION;\""
             }
         }
 
