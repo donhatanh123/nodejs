@@ -9,14 +9,16 @@ app.use(bodyParser.urlencoded({
 app.get('/', function (req, res) {
     return res.send({ error: true, message: 'hello' })
 });
-
+var dbHost = '192.168.110.128:3306';
+var dbUser = 'root';
+var dbPassword = '123456a@';
 var dbConn = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    host: dbHost,
+    user: dbUser,
+    password: dbPassword
 });
 
- console.log("Conneting to MYSQL IP= " + process.env.DB_HOST + " USER=" +  process.env.DB_USER + " PASS=" + process.env.DB_PASS);
+ console.log("Conneting to MYSQL IP= " + dbHost + " USER=" +  dbUser + " PASS=" + dbPassword);
 
 dbConn.connect(function(err) {
   if (err) 
