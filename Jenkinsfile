@@ -7,16 +7,6 @@ pipeline {
     }
     stages {
 
-        stage('Packaging/Pushing imagae') {
-
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker compose build donhatanh2000/nodejsmysql .'
-                    sh 'docker compose push donhatanh2000/nodejsmysql'
-                }
-            }
-        }
-
         stage('Deploy NodeJs app to DEV') {
             steps {
                 echo 'Deploying and cleaning'
