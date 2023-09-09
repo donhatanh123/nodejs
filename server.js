@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
 });
 var dbHost = '192.168.110.128';
 var dbPort = 3306;
-var dbUser = 'root'@'&';
+var dbUser = 'nodejs'@'&';
 var dbPassword = '123456a@';
 var dbConn = mysql.createConnection({
     host: dbHost,
