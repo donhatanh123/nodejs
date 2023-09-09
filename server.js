@@ -9,11 +9,13 @@ app.use(bodyParser.urlencoded({
 app.get('/', function (req, res) {
     return res.send({ error: true, message: 'hello' })
 });
-var dbHost = '192.168.110.128:3306';
+var dbHost = '192.168.110.128';
+var dbPort = 3306;
 var dbUser = 'root';
 var dbPassword = '123456a@';
 var dbConn = mysql.createConnection({
     host: dbHost,
+    port: dbPort,
     user: dbUser,
     password: dbPassword
 });
