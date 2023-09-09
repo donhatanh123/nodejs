@@ -17,8 +17,8 @@ pipeline {
                 
                 sh 'docker compose up'
                 sh 'sleep 20'
-                sh "docker exec -it nodejsmysql_db_1 mysql -u root -p123456a@ -e \"CREATE USER 'root'@'localhost' IDENTIFIED BY '123456a@';\""
-                sh "docker exec -it nodejsmysql_db_1 mysql -u root -p123456a@ -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;\""
+                sh "docker exec -it deploy_nodejs_app_to_dev_main-db_1 mysql -u root -p123456a@ -e \"CREATE USER 'root'@'localhost' IDENTIFIED BY '123456a@';\""
+                sh "docker exec -it deploy_nodejs_app_to_dev_main-db_1 -u root -p123456a@ -e \"GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;\""
             }
         }
  
