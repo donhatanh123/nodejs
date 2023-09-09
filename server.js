@@ -11,9 +11,9 @@ app.get('/', function (req, res) {
 });
 
 var dbConn = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
 });
 
  console.log("Conneting to MYSQL IP= " + process.env.DB_HOST + " USER=" +  process.env.DB_USER + " PASS=" + process.env.DB_PASS);
