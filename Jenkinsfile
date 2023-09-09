@@ -55,6 +55,7 @@ pipeline {
 
                 sh 'docker container run -d --name nhatanh-nginx -p 80:80 --network dev --restart always nginx'
                 sh 'docker cp ./nginx.conf nhatanh-nginx:/etc/nginx/nginx.conf'
+                sh "docker restart nhatanh-nginx"
             }
         }
     }
