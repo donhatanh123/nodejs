@@ -10,9 +10,9 @@ pipeline {
         stage('Deploy NodeJs app to DEV') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker container stop nodejsmysql_nginx_1 || echo "this container does not exist" '
-                sh 'docker container stop nodejsmysql_nodejs_1 || echo "this container does not exist" '
-                sh 'docker nodejsmysql_db_1 || echo "this container does not exist" '
+                sh 'docker container stop deploy_nodejs_app_to_dev_main-nginx-1 || echo "this container does not exist" '
+                sh 'docker container stop deploy_nodejs_app_to_dev_main-nodejs_1 || echo "this container does not exist" '
+                sh 'docker deploy_nodejs_app_to_dev_main-db_1 || echo "this container does not exist" '
                 sh 'echo y | docker container prune '
                 
                 sh 'docker compose up'
