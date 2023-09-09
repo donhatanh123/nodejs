@@ -11,7 +11,7 @@ pipeline {
 
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker compose build -t donhatanh2000/nodejsmysql .'
+                    sh 'docker compose build donhatanh2000/nodejsmysql .'
                     sh 'docker compose push donhatanh2000/nodejsmysql'
                 }
             }
