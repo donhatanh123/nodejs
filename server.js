@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({
 app.get('/', function (req, res) {
     return res.send({ error: true, message: 'hello' })
 });
-var dbHost = 'localhost';
+var dbHost = process.env.DB_HOST || 'localhost';
 var dbPort = 3306;
 var dbUser = 'nodejs';
 var dbPassword = '123456a@';
