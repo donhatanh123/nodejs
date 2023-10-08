@@ -5,14 +5,13 @@ pipeline {
     environment {
         MYSQL_ROOT_LOGIN = credentials('my-sql-account')
         IMAGE_NAME = 'nodejs'
-        TAG = "${env.BUILD_NUMBER}"
+        TIMESTAMP = sh(returnStdout: true, script: "date +%d.%m.%Y").trim()
+        TAG = "${TIMESTAMP}-v${BUILD_NUMBER}"
     }
     stages {
         stage ('Define TAG') {
             steps {
                 script {
-                    TIMESTAMP = sh(returnStdout: true, script: "date +%d.%m.%Y").trim()
-                	TAG = "${TIMESTAMP}-v${BUILD_NUMBER}"
                 	echo "TAG: $TAG"
                 }
             }
