@@ -13,6 +13,7 @@ pipeline {
             steps {
                 script {
                 	echo "TAG: $TAG"
+                    writeFile file: 'tag.txt', text: "$TAG"
                 }
             }
         }
