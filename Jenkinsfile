@@ -20,8 +20,8 @@ pipeline {
         stage('Packaging/Pushing image') {
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t donhatanh2000/nodejs .'
-                    sh 'docker tag donhatanh2000/nodejs:${TAG}'
+                    sh 'docker build -t donhatanh2000/nodejs:$TAG .'
+                    sh 'docker tag donhatanh2000/nodejs:${TAG} donhatanh2000/nodejs:latest'
                     sh 'docker push donhatanh2000/nodejs:${TAG}'
                     sh 'docker push donhatanh2000/nodejs:latest'
                 }
