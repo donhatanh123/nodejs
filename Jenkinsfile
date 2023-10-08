@@ -5,6 +5,7 @@ pipeline {
     environment {
         MYSQL_ROOT_LOGIN = credentials('my-sql-account')
         IMAGE_NAME = 'nodejs'
+        TAG = "${env.BUILD_NUMBER}"
     }
     stages {
         stage ('Define TAG') {
